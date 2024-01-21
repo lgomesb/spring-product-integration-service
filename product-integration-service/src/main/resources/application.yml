@@ -1,9 +1,0 @@
-server: 
-  servlet:
-    context-path: /product-integration-service
-spring:
-  application:
-    name: ms-product-integration-service
-  profiles:
-    active:
-      - ${ENVIRONMENT}
