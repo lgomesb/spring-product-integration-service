@@ -6,4 +6,4 @@ spring:
     name: ms-product-integration-service
   profiles:
     active:
-      - ${ENVIRONMENT}
+      - ${ENVIRONMENT:dev}
