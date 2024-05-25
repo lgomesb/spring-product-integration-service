@@ -30,6 +30,32 @@ public class ProductIntegrationServiceExceptionHandler {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error); 
     }
 
+    @ExceptionHandler( ProductNotFoundException.class )
+	public ResponseEntity<StandardError> productNotFoundError( ProductNotFoundException e, HttpServletRequest request) {
+        StandardError error = StandardError.builder()
+            .status(HttpStatus.BAD_REQUEST.value())
+            .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+            .messege(e.getMessage())
+            .path(request.getRequestURI())
+            .build();
+            logger.info("#".repeat(10) + "ERROR HANDLER");
+            logger.info(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler( ProductOrderServiceException.class )
+	public ResponseEntity<StandardError> productOrderServiceError( ProductOrderServiceException e, HttpServletRequest request) {
+        StandardError error = StandardError.builder()
+            .status(HttpStatus.BAD_REQUEST.value())
+            .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+            .messege(e.getMessage())
+            .path(request.getRequestURI())
+            .build();
+            logger.info("#".repeat(10) + "ERROR HANDLER");
+            logger.info(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
     @ExceptionHandler( MethodArgumentNotValidException.class )
 	public ResponseEntity<StandardError> validationError( MethodArgumentNotValidException e, HttpServletRequest request) { 
         

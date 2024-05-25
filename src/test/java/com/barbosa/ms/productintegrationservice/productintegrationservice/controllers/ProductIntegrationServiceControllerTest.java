@@ -2,7 +2,7 @@ package com.barbosa.ms.productintegrationservice.productintegrationservice.contr
 
 import com.barbosa.ms.productintegrationservice.productintegrationservice.ProductIntegrationServiceApplicationTests;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.controller.ProductIntegrationServiceController;
-import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.ProductIntegrationServiceRecord;
+import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.ProductOrderResponseRecord;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.services.ProductIntegrationServiceService;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -35,13 +35,13 @@ class ProductIntegrationServiceControllerTest {
     @InjectMocks
     private ProductIntegrationServiceController controller;
 
-    private ProductIntegrationServiceRecord productintegrationserviceRecord;
+    private ProductOrderResponseRecord productintegrationserviceRecord;
 
     @BeforeEach
     void setup() {
-        productintegrationserviceRecord = ProductIntegrationServiceRecord.builder()
+        productintegrationserviceRecord = ProductOrderResponseRecord.builder()
                 .id(UUID.randomUUID())
-                .name("Test-ProductIntegrationService-01")
+                .description("Test-ProductIntegrationService-01")
                 .build();
 
     }

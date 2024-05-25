@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public abstract class DataDTO {
     
-    private String name;
+    private String description;
     
 }

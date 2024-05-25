@@ -5,6 +5,5 @@ import lombok.Builder;
 import java.util.UUID;
 
 @Builder
-public record ProductIntegrationServiceRecord(UUID id, String name) {
-    
+public record ProductOrderItemRecord(UUID productId, int quantity) {
 }

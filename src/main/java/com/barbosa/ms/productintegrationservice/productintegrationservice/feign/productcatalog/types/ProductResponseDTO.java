@@ -1,4 +1,4 @@
-package com.barbosa.ms.productintegrationservice.productintegrationservice.feign.dto.response;
+package com.barbosa.ms.productintegrationservice.productintegrationservice.feign.productcatalog.types;
 
 import lombok.Data;
 

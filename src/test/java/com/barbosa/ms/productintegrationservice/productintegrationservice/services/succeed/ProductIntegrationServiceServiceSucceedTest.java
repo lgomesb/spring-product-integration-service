@@ -1,6 +1,6 @@
 package com.barbosa.ms.productintegrationservice.productintegrationservice.services.succeed;
 
-import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.ProductIntegrationServiceRecord;
+import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.ProductOrderResponseRecord;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.services.ProductIntegrationServiceServiceBean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +18,7 @@ class ProductIntegrationServiceServiceSucceedTest {
 
     @InjectMocks
     private ProductIntegrationServiceServiceBean service;
-    private ProductIntegrationServiceRecord productintegrationserviceRecord;
+    private ProductOrderResponseRecord productintegrationserviceRecord;
 
     @Test
     void shouldSuccessWhenCreate() {
