@@ -10,3 +10,8 @@ product-catalog:
 
 product-order:
     url: http://localhost:8080/product-order
+
+
+logging:
+  level:
+    web: 'DEBUG'

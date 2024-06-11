@@ -1,22 +1,21 @@
 package com.barbosa.ms.productintegrationservice.productintegrationservice.services;
 
+import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.CreateProductOrderRequestRecord;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.ProductOrderItemRecord;
-import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.ProductOrderRequestRecord;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.ProductOrderResponseRecord;
-import com.barbosa.ms.productintegrationservice.productintegrationservice.exception.ProductConstraintViolation;
+import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.UpdateProductOrderRequestRecord;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.exception.ProductNotFoundException;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.exception.ProductOrderServiceException;
+import com.barbosa.ms.productintegrationservice.productintegrationservice.feign.dto.request.StatusProductOrderEnum;
+import com.barbosa.ms.productintegrationservice.productintegrationservice.feign.dto.request.StatusProductOrderRequestDTO;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.feign.productcatalog.ProductCatalogFeign;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.feign.productorder.ProductOrderFeign;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.feign.productorder.types.OrderItemDTO;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.feign.productorder.types.ProductOrderRequestDTO;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.feign.productorder.types.ProductOrderResponseDTO;
-import jakarta.validation.ConstraintViolationException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import javax.management.ObjectName;
-import java.util.Collections;
 import java.util.UUID;
 
 @Service
@@ -35,11 +34,11 @@ public class ProductIntegrationServiceServiceBean implements ProductIntegrationS
     }
 
     @Override
-    public ProductOrderResponseRecord createProductOrder(ProductOrderRequestRecord productOrderRequestRecord) {
+    public ProductOrderResponseRecord createProductOrder(CreateProductOrderRequestRecord createProductOrderRequestRecord) {
 
         ProductOrderRequestDTO request = ProductOrderRequestDTO.builder()
-                .description(productOrderRequestRecord.description())
-                .items(productOrderRequestRecord.items()
+                .description(createProductOrderRequestRecord.description())
+                .items(createProductOrderRequestRecord.items()
                         .stream()
                         .map(i -> new OrderItemDTO(this.productIdValidate(i.productId()), i.quantity()))
                         .toList())
@@ -56,11 +55,33 @@ public class ProductIntegrationServiceServiceBean implements ProductIntegrationS
 
     }
 
+    @Override
+    public void updateProductOrder(UpdateProductOrderRequestRecord updateProductOrderRequestRecord) {
+        throw new UnsupportedOperationException("Method is not implemented.");
+    }
+
+    @Override
+    public void approveProductOrder(UUID productOrderId) {
+        productOrderFeign.updateStatus(productOrderId.toString(), new StatusProductOrderRequestDTO(StatusProductOrderEnum.ACCEPTED));
+    }
+
+    @Override
+    public void rejectProductOrder(UUID productOrderId) {
+        productOrderFeign.updateStatus(productOrderId.toString(), new StatusProductOrderRequestDTO(StatusProductOrderEnum.REJECT));
+
+    }
+
+    @Override
+    public void completeProductOrder(UUID productOrderId) {
+        productOrderFeign.updateStatus(productOrderId.toString(), new StatusProductOrderRequestDTO(StatusProductOrderEnum.COMPLETED));
+
+    }
+
     private UUID productIdValidate(UUID productId) {
         try {
             return productFeign.findById(productId)
-                    .orElseThrow(() -> new ProductNotFoundException(String.format("Product not found with id %s.",
-                            productId.toString())))
+                    .orElseThrow(() -> new ProductNotFoundException(
+                            String.format("Product not found with id %s.", productId.toString())))
                     .getId();
         } catch (Exception e) {
             throw new ProductOrderServiceException(String.format("Product not found with id %s. " +

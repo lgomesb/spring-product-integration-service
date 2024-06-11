@@ -1,7 +1,7 @@
 package com.barbosa.ms.productintegrationservice.productintegrationservice;
 
 import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.ProductOrderItemRecord;
-import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.ProductOrderRequestRecord;
+import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.CreateProductOrderRequestRecord;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.services.ProductIntegrationServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -26,12 +26,16 @@ public class ProductIntegrationServiceApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+//        test01();
+
+    }
+
+    private void test01() {
         System.out.println("PRODUCT ORDER");
-        ProductOrderRequestRecord productOrderRequestRecord = ProductOrderRequestRecord.builder()
+        CreateProductOrderRequestRecord createProductOrderRequestRecord = CreateProductOrderRequestRecord.builder()
                 .description("test-" + System.currentTimeMillis())
                 .items(Collections.singletonList(new ProductOrderItemRecord(UUID.fromString("65b2d800-1e64-410a-a196-935f64ecec3c"), 4)))
                 .build();
-        System.out.println(service.createProductOrder(productOrderRequestRecord));
-
+        System.out.println(service.createProductOrder(createProductOrderRequestRecord));
     }
 }

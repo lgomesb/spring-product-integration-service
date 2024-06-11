@@ -3,7 +3,8 @@ package com.barbosa.ms.productintegrationservice.productintegrationservice.domai
 import lombok.Builder;
 
 import java.util.List;
+import java.util.UUID;
 
 @Builder
-public record ProductOrderRequestRecord(String description, List<ProductOrderItemRecord> items) {
+public record UpdateProductOrderRequestRecord(UUID id, String description, List<ProductOrderItemRecord> items) {
 }
