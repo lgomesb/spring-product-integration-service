@@ -11,6 +11,9 @@ product-catalog:
 product-order:
     url: http://localhost:8080/product-order
 
+product-inventory:
+    url: http://localhost:8083/product-inventory
+
 
 logging:
   level:

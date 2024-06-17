@@ -1,4 +1,4 @@
-package com.barbosa.ms.productintegrationservice.productintegrationservice.feign.dto.request;
+package com.barbosa.ms.productintegrationservice.productintegrationservice.domain.enums;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public enum StatusProductOrderEnum {
     DRAFT,
-    ACCEPTED,
-    REJECT,
+    APPROVED,
+    REJECTED,
     COMPLETED;
 
     public static StatusProductOrderEnum getByName(String name) {

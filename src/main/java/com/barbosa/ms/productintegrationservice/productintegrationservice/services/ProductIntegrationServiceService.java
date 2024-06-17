@@ -3,6 +3,7 @@ package com.barbosa.ms.productintegrationservice.productintegrationservice.servi
 import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.CreateProductOrderRequestRecord;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.ProductOrderResponseRecord;
 import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.records.UpdateProductOrderRequestRecord;
+import com.barbosa.ms.productintegrationservice.productintegrationservice.domain.enums.StatusProductOrderEnum;
 
 import java.util.UUID;
 
@@ -12,10 +13,7 @@ public interface ProductIntegrationServiceService {
 
     void updateProductOrder(UpdateProductOrderRequestRecord updateProductOrderRequestRecord);
 
-    void approveProductOrder(UUID productOrderId);
+    void updateStatusProductOrder(UUID productOrderId, StatusProductOrderEnum status);
 
-    void rejectProductOrder(UUID productOrderId);
-
-    void completeProductOrder(UUID productOrderId);
 
 }

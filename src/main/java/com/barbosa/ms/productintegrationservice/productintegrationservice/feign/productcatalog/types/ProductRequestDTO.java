@@ -1,4 +1,4 @@
-package com.barbosa.ms.productintegrationservice.productintegrationservice.feign.dto.request;
+package com.barbosa.ms.productintegrationservice.productintegrationservice.feign.productcatalog.types;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
