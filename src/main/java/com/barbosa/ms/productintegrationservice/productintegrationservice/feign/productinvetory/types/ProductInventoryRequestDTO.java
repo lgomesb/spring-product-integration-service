@@ -16,5 +16,7 @@ public class ProductInventoryRequestDTO {
 
     private UUID productId;
 
+    private UUID productOrderId;
+
     private Integer quantity;
 }

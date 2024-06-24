@@ -73,14 +73,15 @@ public class ProductIntegrationServiceServiceBean implements ProductIntegrationS
 
         if(StatusProductOrderEnum.COMPLETED.equals(status)) {
             ProductOrderResponseDTO productOrder = productOrderFeign.findById(productOrderId);
-            productOrder.getItems().forEach(this::addProductInventory);
+            productOrder.getItems().forEach(i -> this.addProductInventory(productOrderId, i));
         }
 
         LOGGER.info("STATUS CODE:" + response.getStatusCode());
     }
 
-    private void addProductInventory(OrderItemDTO orderItemDTO) {
+    private void addProductInventory(UUID productOrderId, OrderItemDTO orderItemDTO) {
         productInvetoryFeign.create(ProductInventoryRequestDTO.builder()
+                .productOrderId(productOrderId)
                 .productId(orderItemDTO.getProductId())
                 .quantity(orderItemDTO.getQuantity())
                 .build());
